@@ -1,0 +1,83 @@
+<div class="row container-fluid jumbotron bg-gray">
+  <div class="col-md-8 offset-md-2">
+    <h4 class="mb-3 text-center">INSERIMENTO WORKOUT (SESSION)</h4>
+    <form [formGroup]="workoutForm" novalidate (ngSubmit)="save(workoutForm.value)">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Nome Workout</label>
+            <input type="text" class="form-control" formControlName="name">
+          </div>
+          <div class="form-group">
+            <label>Nome Trainer</label>
+            <input type="text" class="form-control" formControlName="trainer_name">
+          </div>
+          <div class="form-group">
+            <label>Durata MIN</label>
+            <input type="text" class="form-control" formControlName="duration">
+          </div>
+          <div class="form-group">
+            <label>Categoria</label>
+            <p>
+              <input type="radio" value="1" formControlName="difficulty"> Bianco
+              <input type="radio" value="2" formControlName="difficulty"> verde
+              <input type="radio" value="3" formControlName="difficulty"> giallo
+              <input type="radio" value="4" formControlName="difficulty"> rosso
+              <input type="radio" value="5" formControlName="difficulty"> nero
+           </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Cover Link</label>
+            <input type="text" class="form-control" formControlName="cover_link">
+          </div>
+          <div class="form-group">
+            <label>Descrizione</label>
+            <input type="text" class="form-control" formControlName="description">
+          </div>
+          <div class="form-group">
+            <label>Tools</label>
+            <input type="text" class="form-control" formControlName="tools">
+          </div>
+          <div class="form-group">
+            <label>Link Alla Pagina</label>
+            <input type="text" class="form-control" formControlName="page_link">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-md-12">
+              <div class="form-group">
+                  <label>Obiettivo</label>
+                  <div *ngFor="let goals of goals.controls; let i=index">
+                      <input type="checkbox" [formControl]="goals" /> {{workout.goals[i].name}}
+                  </div>  
+              </div>
+          </div>
+      </div>
+      <!--addresses-->
+      <label for="">INSERIMENTO GIORNALIRO (WORKOUT)</label>
+      <div formArrayName="sessions">
+        <div *ngFor="let session of workoutForm.controls.sessions.controls; let i=index" class="panel panel-default">
+          <div class="panel-heading text-right">
+            <span class="pull-right" *ngIf="workoutForm.controls.sessions.controls.length > 1" (click)="removeSession(i)">X</span>
+          </div>
+          <div class="panel-body" [formGroupName]="i">
+            <app-session [sessionForm]="workoutForm.controls.sessions.controls[i]"></app-session>
+          </div>
+        </div>
+      </div>
+
+      <div class="margin-20 my-2">
+        <a (click)="addSession()" class="btn btn-dark text-white btn-sm">
+          NUOVO GIORNO
+        </a>
+      </div>
+
+      <div class="margin-20 text-center">
+        <button type="submit" class="btn btn-primary pull-right" [disabled]="!workoutForm.valid">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
