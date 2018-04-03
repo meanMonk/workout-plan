@@ -7,12 +7,12 @@ export const environment = {
   production: false,
   config: {
     firebase: {
-      apiKey: "AIzaSyDY1y0c23nGpjRUHixPmzsj1Skjzdk1Vjk",
-      authDomain: "workplan-64fb1.firebaseapp.com",
-      databaseURL: "https://workplan-64fb1.firebaseio.com",
-      projectId: "workplan-64fb1",
-      storageBucket: "workplan-64fb1.appspot.com",
-      messagingSenderId: "1096393177613"
+      apiKey: "AIzaSyCS1lJfEEVNWKQfp-VfHKgRMpexZTy-Dq0",
+      authDomain: "workout-plan-12.firebaseapp.com",
+      databaseURL: "https://workout-plan-12.firebaseio.com",
+      projectId: "workout-plan-12",
+      storageBucket: "workout-plan-12.appspot.com",
+      messagingSenderId: "154805823244"
     }
   }
 };

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray} from '@angular/forms';
+import {FormService} from '../service/form.service';
 
 @Component({
   selector: 'app-workout-plan',
@@ -12,13 +13,13 @@ export class WorkoutPlanComponent implements OnInit {
 
     workout = {
       goals: [
-        { name: 'Dimagrimento',  selected: true, id: 0 },
+        { name: 'Dimagrimento',  selected: false, id: 0 },
         { name: 'tonificazione',  selected: false, id: 1 },
         { name: 'aumento mass',  selected: false, id: 2 }
       ]
     }
-    
-    constructor(private _fb: FormBuilder) { }
+
+    constructor(private _fb: FormBuilder, private formService: FormService) { }
 
     ngOnInit() {
         this.workoutForm = this._fb.group({
@@ -33,7 +34,6 @@ export class WorkoutPlanComponent implements OnInit {
             page_link: [''],
             sessions: this._fb.array([])
         });
-        
         this.addSession();
     }
 
@@ -45,7 +45,7 @@ export class WorkoutPlanComponent implements OnInit {
     }
 
     get goals() {
-      return this.workoutForm.get('goals')
+      return this.workoutForm.get('goals');
     }
 
     initSession() {
@@ -60,7 +60,6 @@ export class WorkoutPlanComponent implements OnInit {
     addSession() {
         const control = <FormArray>this.workoutForm.controls['sessions'];
         const addrCtrl = this.initSession();
-        
         control.push(addrCtrl);
     }
 
@@ -69,10 +68,16 @@ export class WorkoutPlanComponent implements OnInit {
         control.removeAt(i);
     }
 
-    save(model: any) {
-        // call API to save
-        // ...
-        console.log(model);
+    save(formValue: any) {
+        const goals = [];
+        formValue.goals.map((selected, i) => {
+          if(selected) {
+            goals.push(this.workout.goals[i].id);
+          }
+        });
+
+        formValue.goals = goals;
+        this.formService.saveWorkoutPlan(formValue);
     }
 
 }

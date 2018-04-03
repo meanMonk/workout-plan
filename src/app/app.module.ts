@@ -6,13 +6,14 @@ import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { SuccessComponent } from './success/success.component';
 import { WorkoutPlanComponent } from './workout-plan/workout-plan.component';
-import { AppRoutesModule } from './app.routes' 
+import { AppRoutesModule } from './app.routes'
 
-import {AngularFireModule} from "angularfire2";
+import {AngularFireModule} from 'angularfire2';
 import {AngularFireAuthModule} from 'angularfire2/auth';
-import {AngularFirestoreModule} from "angularfire2/firestore";
-import {environment} from "@env/environment";
+import {AngularFirestoreModule} from 'angularfire2/firestore';
+import {environment} from '@env/environment';
 import { SessionComponent } from './session/session.component';
+import {FormService} from "./service/form.service";
 
 const FIREBASE_MODULES = [
   AngularFireModule.initializeApp(environment.config.firebase),
@@ -36,7 +37,9 @@ const FIREBASE_MODULES = [
     ReactiveFormsModule,
     AppRoutesModule
   ],
-  providers: [],
+  providers: [
+    FormService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
