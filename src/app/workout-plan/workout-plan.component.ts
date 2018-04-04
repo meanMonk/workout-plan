@@ -28,7 +28,7 @@ export class WorkoutPlanComponent implements OnInit {
             duration: [''],
             cover_link: [''],
             description: [''],
-            difficulty: [Number],
+            difficulty: [''],
             goals: this.buildGoals(),
             tools: [''],
             page_link: [''],
@@ -77,6 +77,7 @@ export class WorkoutPlanComponent implements OnInit {
         });
 
         formValue.goals = goals;
+        formValue.difficulty = +formValue.difficulty;
         this.formService.saveWorkoutPlan(formValue);
     }
 
